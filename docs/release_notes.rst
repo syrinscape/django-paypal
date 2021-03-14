@@ -2,6 +2,30 @@
  Release notes
 ===============
 
+Version 1.1 (unreleased)
+------------------------
+
+* Changed default values of POSTBACK_ENDPOINT and SANDBOX_POSTBACK_ENDPOINT to ones
+  now recommended by PayPal.
+
+Version 1.0 (2019-03-22)
+------------------------
+
+Version 0.5.0
+-------------
+
+Version 0.4.1
+-------------
+
+Version 0.4.0
+-------------
+
+Version 0.3.6
+-------------
+
+Version 0.3.4
+-------------
+
 Version 0.3.3
 -------------
 
