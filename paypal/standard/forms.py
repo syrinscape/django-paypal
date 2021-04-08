@@ -13,7 +13,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 from paypal.standard.conf import (
-    DONATION_IMAGE, DONATION_SANDBOX_IMAGE, IMAGE, POSTBACK_ENDPOINT, SANDBOX_IMAGE, SANDBOX_POSTBACK_ENDPOINT,
+    DONATION_IMAGE, DONATION_SANDBOX_IMAGE, IMAGE, LOGIN_URL, SANDBOX_IMAGE, SANDBOX_LOGIN_URL,
     SUBSCRIPTION_IMAGE, SUBSCRIPTION_SANDBOX_IMAGE
 )
 from paypal.standard.widgets import ReservedValueHiddenInput, ValueHiddenInput
@@ -176,18 +176,18 @@ class PayPalPaymentsForm(forms.Form):
     def test_mode(self):
         return getattr(settings, 'PAYPAL_TEST', True)
 
-    def get_endpoint(self):
+    def get_login_url(self):
         "Returns the endpoint url for the form."
         if self.test_mode():
-            return SANDBOX_POSTBACK_ENDPOINT
+            return SANDBOX_LOGIN_URL
         else:
-            return POSTBACK_ENDPOINT
+            return LOGIN_URL
 
     def render(self):
         return format_html(u"""<form action="{0}" method="post">
     {1}
     <input type="image" src="{2}" border="0" name="submit" alt="Buy it Now" />
-</form>""", self.get_endpoint(), self.as_p(), self.get_image())
+</form>""", self.get_login_url(), self.as_p(), self.get_image())
 
     def sandbox(self):
         "Deprecated.  Use self.render() instead."

@@ -9,6 +9,10 @@ class PayPalSettingsError(Exception):
 POSTBACK_ENDPOINT = "https://ipnpb.paypal.com/cgi-bin/webscr"
 SANDBOX_POSTBACK_ENDPOINT = "https://ipnpb.sandbox.paypal.com/cgi-bin/webscr"
 
+# Login endpoints
+LOGIN_URL = "https://www.paypal.com/cgi-bin/webscr"
+SANDBOX_LOGIN_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr"
+
 # Images
 IMAGE = getattr(settings, "PAYPAL_IMAGE", "https://images.paypal.com/images/x-click-but01.gif")
 SUBSCRIPTION_IMAGE = getattr(settings, "PAYPAL_SUBSCRIPTION_IMAGE",
