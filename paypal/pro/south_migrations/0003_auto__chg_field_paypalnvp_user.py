@@ -21,7 +21,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
 
         # Changing field 'PayPalNVP.user'
-        db.alter_column(u'paypal_nvp', 'user_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True))
+        db.alter_column(u'paypal_nvp', 'user_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm[user_orm_label], null=True))
 
     def backwards(self, orm):
 
@@ -29,6 +29,12 @@ class Migration(SchemaMigration):
         db.alter_column(u'paypal_nvp', 'user_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm[user_orm_label], null=True))
 
     models = {
+        user_model_label: {
+            'Meta': {'object_name': User.__name__,
+                     'db_table': "'%s'" % User._meta.db_table
+            },
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+        },
         u'auth.group': {
             'Meta': {'object_name': 'Group'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -93,7 +99,7 @@ class Migration(SchemaMigration):
             'timestamp': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'token': ('django.db.models.fields.CharField', [], {'max_length': '64', 'blank': 'True'}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm[user_orm_label]", 'null': 'True', 'blank': 'True'}),
             'zip': ('django.db.models.fields.CharField', [], {'max_length': '32', 'blank': 'True'})
         }
     }
