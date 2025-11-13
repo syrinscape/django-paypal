@@ -260,9 +260,8 @@ class PayPalWPP(object):
 
         nvp_obj = self._fetch(params, required, defaults)
 
-        # TODO: This fail silently check should be using the error code, but its not easy to access
-        flag_info_test_string = 'Invalid profile status for cancel action; profile should be active or suspended'
-        if not nvp_obj.flag or (fail_silently and nvp_obj.flag_info == flag_info_test_string):
+        flag_code_test_string = '11556'
+        if not nvp_obj.flag or (fail_silently and nvp_obj.flag_code == flag_code_test_string):
             if params['action'] == 'Cancel':
                 recurring_cancel.send(sender=nvp_obj)
             elif params['action'] == 'Suspend':
