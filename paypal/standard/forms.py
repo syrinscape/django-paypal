@@ -267,10 +267,13 @@ class PayPalEncryptedPaymentsForm(PayPalPaymentsForm):
         return out.read()
 
     def as_p(self):
+        encrypted = self._encrypt()
+        if isinstance(encrypted, bytes):
+            encrypted = encrypted.decode("ascii")
         return mark_safe(u"""
 <input type="hidden" name="cmd" value="_s-xclick" />
 <input type="hidden" name="encrypted" value="%s" />
-        """ % self._encrypt())
+        """ % encrypted)
 
 
 class PayPalSharedSecretEncryptedPaymentsForm(PayPalEncryptedPaymentsForm):
